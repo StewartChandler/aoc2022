@@ -38,12 +38,16 @@ fn main() -> Result<(), Box<dyn Error>> {
     );
 
     // part 2
-    let mut sum = 0u32;
-    let mut itr = rucksacks.iter().map(|(l, r)| (l | r));
-    while let Some(val) = itr.next() {
-        sum += (val & itr.next().unwrap_or(0) & itr.next().unwrap_or(0)).trailing_zeros();
-    }
-    println!("Part 2: {}", sum);
+    println!(
+        "Part 2: {}",
+        rucksacks
+            .chunks_exact(3)
+            .map(
+                |lr| ((lr[0].0 | lr[0].1) & (lr[1].0 | lr[1].1) & (lr[2].0 | lr[2].1))
+                    .trailing_zeros()
+            )
+            .sum::<u32>()
+    );
 
     Ok(())
 }

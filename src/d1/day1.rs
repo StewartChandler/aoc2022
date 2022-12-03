@@ -37,7 +37,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         .into_iter()
         .map(|v| v.into_iter().sum::<u32>())
         .collect();
-    totals.sort();
+    let i = totals.len() - 3;
+    totals.select_nth_unstable(i);
     println!("Part 2: {}", totals.into_iter().rev().take(3).sum::<u32>());
 
     Ok(())
