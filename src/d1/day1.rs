@@ -39,7 +39,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .collect();
     let i = totals.len() - 3;
     totals.select_nth_unstable(i);
-    println!("Part 2: {}", totals.into_iter().rev().take(3).sum::<u32>());
+    println!("Part 2: {}", totals[totals.len()-3..].into_iter().sum::<u32>());
 
     Ok(())
 }
