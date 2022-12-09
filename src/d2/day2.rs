@@ -129,11 +129,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let fpath = std::env::args().nth(1).expect("no file argument found");
     let mut rounds: Vec<Strategy> = Vec::new();
     let mut rounds2: Vec<RevStrategy> = Vec::new();
-    for line in BufReader::new(File::open(fpath)?).lines() {
-        if let Ok(s) = line {
-            rounds.push(s.parse()?);
-            rounds2.push(s.parse()?);
-        }
+    for s in BufReader::new(File::open(fpath)?).lines().flatten() {
+        rounds.push(s.parse()?);
+        rounds2.push(s.parse()?);
     }
 
     // eprintln!("{:?}", rounds);

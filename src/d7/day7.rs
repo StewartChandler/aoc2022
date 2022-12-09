@@ -60,7 +60,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             .take_while(|x| *x <= 100000)
             .sum::<u64>();
 
-    println!("Part 1 {}", result);
+    println!("Part 1 {result}");
 
     // part 2
     let space_needed = lines
@@ -124,7 +124,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         (None, Some(y)) => y,
         (None, None) => panic!("No minimum"),
     };
-    println!("Part 2: {}", result);
+    println!("Part 2: {result}");
 
     Ok(())
 }

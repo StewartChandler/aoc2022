@@ -35,7 +35,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                     .all(|o| trees[o] < h)
         })
         .count();
-    println!("Part 1: {}", visible);
+    println!("Part 1: {visible}");
 
     let max_scenic = trees
         .iter()
@@ -46,27 +46,27 @@ fn main() -> Result<(), Box<dyn Error>> {
             (stride * row..i)
                 .rev()
                 .position(|o| trees[o] >= h)
-                .and_then(|v| Some(v + 1))
+                .map(|v| v + 1)
                 .unwrap_or(i - stride * row)
                 * (i + 1..stride * (row + 1))
                     .position(|o| trees[o] >= h)
-                    .and_then(|v| Some(v + 1))
+                    .map(|v| v + 1)
                     .unwrap_or(stride * (row + 1) - (i + 1))
                 * (col..i)
                     .step_by(stride)
                     .rev()
                     .position(|o| trees[o] >= h)
-                    .and_then(|v| Some(v + 1))
+                    .map(|v| v + 1)
                     .unwrap_or(row)
                 * (i + stride..trees.len() + col)
                     .step_by(stride)
                     .position(|o| trees[o] >= h)
-                    .and_then(|v| Some(v + 1))
+                    .map(|v| v + 1)
                     .unwrap_or(rows - row - 1)
         })
         .max()
         .unwrap();
-    println!("Part 2: {}", max_scenic);
+    println!("Part 2: {max_scenic}");
 
     Ok(())
 }

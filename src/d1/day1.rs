@@ -28,7 +28,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     if let Some(m) = cals.iter().map(|v| v.iter().sum::<u32>()).max() {
-        println!("Part 1: {}", m);
+        println!("Part 1: {m}");
     } else {
         eprintln!("no max could be found");
     }
@@ -39,10 +39,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .collect();
     let i = totals.len() - 3;
     totals.select_nth_unstable(i);
-    println!(
-        "Part 2: {}",
-        totals[totals.len() - 3..].into_iter().sum::<u32>()
-    );
+    println!("Part 2: {}", totals[totals.len() - 3..].iter().sum::<u32>());
 
     Ok(())
 }

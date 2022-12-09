@@ -8,15 +8,13 @@ fn main() -> Result<(), Box<dyn Error>> {
     let fpath = std::env::args().nth(1).expect("no file argument found");
 
     let mut pairs: Vec<[u32; 4]> = Vec::new();
-    for line in BufReader::new(File::open(fpath)?).lines() {
-        if let Ok(s) = line {
-            let nums: Vec<u32> = s
-                .split(&[',', '-'])
-                .map(|n| n.parse::<u32>().unwrap())
-                .collect();
+    for s in BufReader::new(File::open(fpath)?).lines().flatten() {
+        let nums: Vec<u32> = s
+            .split(&[',', '-'])
+            .map(|n| n.parse::<u32>().unwrap())
+            .collect();
 
-            pairs.push(nums.try_into().unwrap());
-        }
+        pairs.push(nums.try_into().unwrap());
     }
 
     // eprintln!("{:#?}", pairs);
