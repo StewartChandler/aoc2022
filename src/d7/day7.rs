@@ -64,13 +64,14 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     // part 2
     let space_needed = lines
-            .iter()
-            .filter_map(|s| {
-                s.split_whitespace()
-                    .next()
-                    .and_then(|t| t.parse::<u64>().ok())
-            })
-            .sum::<u64>() - 40000000;
+        .iter()
+        .filter_map(|s| {
+            s.split_whitespace()
+                .next()
+                .and_then(|t| t.parse::<u64>().ok())
+        })
+        .sum::<u64>()
+        - 40000000;
 
     let mut size_stack: Vec<u64> = Vec::new();
     let result: u64 = match (
