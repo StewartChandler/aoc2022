@@ -50,15 +50,15 @@ fn main() -> Result<(), Box<dyn Error>> {
         })
         .filter(|x| *x <= 100000)
         .sum::<u64>()
-        + {
-            let mut iter = size_stack // unwind stack
-                .into_iter()
-                .rev();
-            std::iter::successors(Some(0u64), move |x| iter.next().and_then(|y| Some(x + y)))
-                .skip(1)
-                .take_while(|x| *x <= 100000)
-                .sum::<u64>()
-        };
+        + size_stack
+            .into_iter()
+            .rev()
+            .scan(0, |x, y| {
+                *x += y;
+                Some(*x)
+            })
+            .take_while(|x| *x <= 100000)
+            .sum::<u64>();
 
     println!("Part 1 {}", result);
 
@@ -110,14 +110,14 @@ fn main() -> Result<(), Box<dyn Error>> {
             })
             .filter(|x| *x >= space_needed)
             .min(),
-        {
-            let mut iter = size_stack // unwind stack
-                .into_iter()
-                .rev();
-            std::iter::successors(Some(0u64), move |x| iter.next().and_then(|y| Some(x + y)))
-                .skip(1)
-                .find(|x| *x >= space_needed)
-        },
+        size_stack
+            .into_iter()
+            .rev()
+            .scan(0, |x, y| {
+                *x += y;
+                Some(*x)
+            })
+            .find(|x| *x >= space_needed),
     ) {
         (Some(x), Some(y)) => x.min(y),
         (Some(x), None) => x,
