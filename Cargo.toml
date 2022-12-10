@@ -39,6 +39,10 @@ path = "src/d8/day8.rs"
 name = "day9"
 path = "src/d9/day9.rs"
 
+[[bin]]
+name = "day10"
+path = "src/d10/day10.rs"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
