@@ -195,10 +195,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         inspects[inspects.len() - 2] * inspects[inspects.len() - 1]
     );
 
-    let gcd = monkeys_2
-        .iter()
-        .map(|m| m.test_div)
-        .fold(0, gcd);
+    let gcd = monkeys_2.iter().map(|m| m.test_div).fold(0, gcd);
     let lcm: i64 = monkeys_2.iter().map(|m| m.test_div).product::<i64>() / gcd;
 
     let mut inspects: Vec<u64> = vec![0; monkeys_2.len()];
